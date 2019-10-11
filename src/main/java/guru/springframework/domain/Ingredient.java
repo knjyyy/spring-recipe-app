@@ -2,10 +2,14 @@ package guru.springframework.domain;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Ingredient {
@@ -18,7 +22,11 @@ public class Ingredient {
 	private BigDecimal amount;
 	//private UnitofMeasure uom;
 	
+	@ManyToOne
 	private Recipe recipe;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	private UnitOfMeasure uom;
 
 	public Long getId() {
 		return id;

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: indra
+Build-Jdk: 11.0.4
+Implementation-Title: spring5-recipe-app
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: guru.springframework
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/spring5-recipe-app
+Created-By: Maven Integration for Eclipse
+

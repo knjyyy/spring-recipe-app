@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -18,8 +20,10 @@ import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repository.CategoryRepository;
 import guru.springframework.repository.RecipeRepository;
 import guru.springframework.repository.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	private CategoryRepository categoryRepository;
@@ -34,6 +38,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
 	
 	public List<Recipe> getRecipes(){
+		log.debug("getRecipes() - load recipe data");
 		List<Recipe> recipes = new ArrayList<Recipe>();
 		
 		//get UOMs
@@ -98,7 +103,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		guacamoleRecipe.setPrepTime(10);
 		guacamoleRecipe.setCookTime(0);
 		guacamoleRecipe.setDifficulty(Difficulty.EASY);
-		guacamoleRecipe.setDirections("1 Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. Place in a bowl.\r\n" + 
+		guacamoleRecipe.setDirection("1 Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. Place in a bowl.\r\n" + 
 				"\\n2 Mash with a fork: Using a fork, roughly mash the avocado. (Don't overdo it! The guacamole should be a little chunky.)\r\n" + 
 				"\\n3 Add salt, lime juice, and the rest: Sprinkle with salt and lime (or lemon) juice. The acid in the lime juice will provide some balance to the richness of the avocado and will help delay the avocados from turning brown. Add the chopped onion, cilantro, black pepper, and chiles. Chili peppers vary individually in their hotness. So, start with a half of one chili pepper and add to the guacamole to your desired degree of hotness. Remember that much of this is done to taste because of the variability in the fresh ingredients. Start with this recipe and adjust to your taste.\r\n" + 
 				"\\n4 Cover with plastic and chill to store: Place plastic wrap on the surface of the guacamole cover it and to prevent air reaching it. (The oxygen in the air causes oxidation which will turn the guacamole brown.) Refrigerate until ready to serve. Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your guacamole, add it just before serving."
@@ -134,7 +139,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		tacosRecipe.setCookTime(9);
 		tacosRecipe.setPrepTime(20);
 		tacosRecipe.setDifficulty(Difficulty.MODERATE);
-		tacosRecipe.setDirections("1 Prepare a gas or charcoal grill for medium-high, direct heat.\r\n" + 
+		tacosRecipe.setDirection("1 Prepare a gas or charcoal grill for medium-high, direct heat.\r\n" + 
 				"\n2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over. Set aside to marinate while the grill heats and you prepare the rest of the toppings.\r\n" + 
 				"\n3 Grill the chicken: Grill the chicken for 3 to 4 minutes per side, or until a thermometer inserted into the thickest part of the meat registers 165F. Transfer to a plate and rest for 5 minutes.\r\n" + 
 				"\n4 Warm the tortillas: Place each tortilla on the grill or on a hot, dry skillet over medium-high heat. As soon as you see pockets of the air start to puff up in the tortilla, turn it with tongs and heat for a few seconds on the other side. Wrap warmed tortillas in a tea towel to keep them warm until serving.\r\n" + 
@@ -178,15 +183,17 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		tacosRecipe.getCategories().add(mexicanCategory);
 		
 		recipes.add(tacosRecipe);
-		
-		System.out.println("Just returning the favor.");
+
+		log.debug("getRecipes() - end");
 		
 		return recipes;
 	}
 
 	@Override
+	@Transactional
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		recipeRepository.saveAll(getRecipes());
+		log.debug("Loading bootstrap");
 		
 	}
 }

@@ -1,23 +1,63 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Recipe Home</title>
+<meta charset="UTF-8" />
+<title>Recipe Home</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>My Recipes!</h1>
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
 
-<table>
-	<thead>
-		<th>ID</th>
-		<th>Description</th>
-	</thead>
-	<tbody> 
-		<tr th:each="recipe : ${recipes}">
-			<td th:text="${recipe.id}">ID</td>
-			<td th:text="${recipe.description}">Description</td>
-		</tr>
-	</tbody>
-</table>
+					<div class="panel-heading">
+						<h1 class="">My Recipes!</h1>
+					</div>
+
+					<div class="panel-body">
+						<div class="table-responsive"
+							th:if="${not #lists.isEmpty(recipes)}">
+							<table class="table table-hover">
+								<thead class="thead-inverse">
+									<tr>
+										<th>ID</th>
+										<th>Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:remove="all">
+										<td th:text="${recipe.id}">123</td>
+										<td th:text="${recipe.description}">Tast Goodness Uno</td>
+									</tr>
+									<tr th:remove="all">
+										<td th:text="${recipe.id}">234</td>
+										<td th:text="${recipe.description}">Tasty goodnes Dos</td>
+									</tr>
+									<tr th:each="recipe : ${recipes}">
+										<td th:text="${recipe.id}">345</td>
+										<td th:text="${recipe.description}">Tasty goodness Tre</td>
+									</tr>
+								</tbody>
+
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

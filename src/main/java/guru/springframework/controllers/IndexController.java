@@ -12,8 +12,10 @@ import guru.springframework.repository.CategoryRepository;
 import guru.springframework.repository.RecipeRepository;
 import guru.springframework.repository.UnitOfMeasureRepository;
 import guru.springframework.service.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class IndexController {
 	
 	private final RecipeService recipeService;
@@ -24,6 +26,7 @@ public class IndexController {
 	
 	@RequestMapping({"", "/", "/index"})
 	public String getIndexPage(Model model) { 
+		log.debug("getIndexPage()");
 		model.addAttribute("recipes", recipeService.getRecipes());
 		
 		return "index"; 

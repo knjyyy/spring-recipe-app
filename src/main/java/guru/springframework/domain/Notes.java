@@ -7,12 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @EqualsAndHashCode(exclude = "recipe")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Notes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

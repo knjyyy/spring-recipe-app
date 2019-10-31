@@ -3,6 +3,7 @@ package guru.springframework.service;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class RecipeServiceImplTest {
 	}
 	
 	@Test
-	public void testGetRecipes() {		
+	public void getRecipesTest() {		
 		Recipe recipe = new Recipe();
 		Set<Recipe> recipesData = new HashSet<>();
 		recipesData.add(recipe);
@@ -39,4 +40,18 @@ public class RecipeServiceImplTest {
 		verify(recipeRepository, times(1)).findAll();
 	}
 
+	@Test
+	public void getRecipeByIdTest() {
+		Recipe recipe = new Recipe();
+		recipe.setId(1l);
+		Optional<Recipe> recipeOptional = Optional.of(recipe);
+
+		when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+		Recipe recipeReturned = recipeService.findById(1l);
+
+		assertNotNull("Null recipe returned", recipeReturned);
+		verify(recipeRepository, times(1)).findById(anyLong());
+		verify(recipeRepository, never()).findAll();
+	}
 }

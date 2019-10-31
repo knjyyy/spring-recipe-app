@@ -102,11 +102,14 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		guacamoleRecipe.setDescription("Perfect Guacamole");
 		guacamoleRecipe.setPrepTime(10);
 		guacamoleRecipe.setCookTime(0);
+		guacamoleRecipe.setServings(4);
+		guacamoleRecipe.setSource("Simply Recipes Food and Cooking Blog");
+		guacamoleRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
 		guacamoleRecipe.setDifficulty(Difficulty.EASY);
 		guacamoleRecipe.setDirection("1 Cut avocado, remove flesh: Cut the avocados in half. Remove seed. Score the inside of the avocado with a blunt knife and scoop out the flesh with a spoon. Place in a bowl.\r\n" + 
-				"\\n2 Mash with a fork: Using a fork, roughly mash the avocado. (Don't overdo it! The guacamole should be a little chunky.)\r\n" + 
-				"\\n3 Add salt, lime juice, and the rest: Sprinkle with salt and lime (or lemon) juice. The acid in the lime juice will provide some balance to the richness of the avocado and will help delay the avocados from turning brown. Add the chopped onion, cilantro, black pepper, and chiles. Chili peppers vary individually in their hotness. So, start with a half of one chili pepper and add to the guacamole to your desired degree of hotness. Remember that much of this is done to taste because of the variability in the fresh ingredients. Start with this recipe and adjust to your taste.\r\n" + 
-				"\\n4 Cover with plastic and chill to store: Place plastic wrap on the surface of the guacamole cover it and to prevent air reaching it. (The oxygen in the air causes oxidation which will turn the guacamole brown.) Refrigerate until ready to serve. Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your guacamole, add it just before serving."
+				"\n2 Mash with a fork: Using a fork, roughly mash the avocado. (Don't overdo it! The guacamole should be a little chunky.)\r\n" + 
+				"\n3 Add salt, lime juice, and the rest: Sprinkle with salt and lime (or lemon) juice. The acid in the lime juice will provide some balance to the richness of the avocado and will help delay the avocados from turning brown. Add the chopped onion, cilantro, black pepper, and chiles. Chili peppers vary individually in their hotness. So, start with a half of one chili pepper and add to the guacamole to your desired degree of hotness. Remember that much of this is done to taste because of the variability in the fresh ingredients. Start with this recipe and adjust to your taste.\r\n" + 
+				"\n4 Cover with plastic and chill to store: Place plastic wrap on the surface of the guacamole cover it and to prevent air reaching it. (The oxygen in the air causes oxidation which will turn the guacamole brown.) Refrigerate until ready to serve. Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your guacamole, add it just before serving."
 				);
 		
 		Notes guacamoleNotes = new Notes();
@@ -120,7 +123,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		
 		guacamoleRecipe.addIngredient(new Ingredient("Ripe Avocadoes", new BigDecimal(2), pieceUOM));
 		guacamoleRecipe.addIngredient(new Ingredient("Kosher salt", new BigDecimal(0.5), teaUOM));
-		guacamoleRecipe.addIngredient(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(1), tableUOM));
+		guacamoleRecipe.addIngredient(new Ingredient("Fresh lime juice or lemon juice", new BigDecimal(1), tableUOM));
 		guacamoleRecipe.addIngredient(new Ingredient("Red Onion, minced or Green Onion, thinly sliced", new BigDecimal(0.25), cupUOM));
 		guacamoleRecipe.addIngredient(new Ingredient("Serrano chiles, stems and seeds removed, minced", new BigDecimal(2), pieceUOM));
 		guacamoleRecipe.addIngredient(new Ingredient("Cilantro ", new BigDecimal(2), pieceUOM));
@@ -138,6 +141,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		tacosRecipe.setDescription("Yummy Tacos");
 		tacosRecipe.setCookTime(9);
 		tacosRecipe.setPrepTime(20);
+		tacosRecipe.setServings(6);
+		tacosRecipe.setSource("Simply Recipes Food and Cooking Blog");
+		tacosRecipe.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
 		tacosRecipe.setDifficulty(Difficulty.MODERATE);
 		tacosRecipe.setDirection("1 Prepare a gas or charcoal grill for medium-high, direct heat.\r\n" + 
 				"\n2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over. Set aside to marinate while the grill heats and you prepare the rest of the toppings.\r\n" + 
@@ -147,13 +153,13 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 				);
 		
 		Notes tacosNotes = new Notes();
-		tacosNotes.setRecipeNotes("\\nWe have a family motto and it is this: Everything goes better in a tortilla.\r\n" + 
-				"\\nAny and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot pan on the stove comes wafting through the house.\r\n" + 
+		tacosNotes.setRecipeNotes("\nWe have a family motto and it is this: Everything goes better in a tortilla.\r\n" + 
+				"\nAny and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot pan on the stove comes wafting through the house.\r\n" + 
 				"\r\n" + 
-				"\\nToday’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!\r\n" + 
+				"\nToday’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!\r\n" + 
 				"\r\n" + 
-				"\\nFirst, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\r\n" + 
-				"\\nGrill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\r\n" + 
+				"\nFirst, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings.\r\n" + 
+				"\nGrill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!\r\n" + 
 				"\r\n" + 
 				"");
 		

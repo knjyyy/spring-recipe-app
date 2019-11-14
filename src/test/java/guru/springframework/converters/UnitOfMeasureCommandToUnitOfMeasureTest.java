@@ -1,21 +1,21 @@
 package guru.springframework.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import guru.springframework.command.UnitOfMeasureCommand;
 import guru.springframework.domain.UnitOfMeasure;
 
-class UnitOfMeasureCommandToUnitOfMeasureTest {
+public class UnitOfMeasureCommandToUnitOfMeasureTest {
 	public static final String DESCRIPTION = "description";
 	public static final Long LONG_VALUE = 1L;
 
 	UnitOfMeasureCommandToUnitOfMeasure converter;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		converter = new UnitOfMeasureCommandToUnitOfMeasure();
 	}	
 

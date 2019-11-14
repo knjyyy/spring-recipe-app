@@ -1,26 +1,26 @@
 package guru.springframework.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import guru.springframework.command.NotesCommand;
 import guru.springframework.domain.Notes;
 
-class NotesToNotesCommandTest {
+public class NotesToNotesCommandTest {
 
 	public static final Long ID_VALUE = 1L;
 	public static final String RECIPE_NOTES = "Notes";
 	NotesToNotesCommand converter;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		converter = new NotesToNotesCommand();
 	}
 
 	@Test
-	void testNull() {
+	public void testNull() {
 		assertNull(converter.convert(null));
 	}
 

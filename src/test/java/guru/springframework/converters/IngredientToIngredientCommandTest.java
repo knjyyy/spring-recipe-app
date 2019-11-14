@@ -1,18 +1,18 @@
 package guru.springframework.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import guru.springframework.command.IngredientCommand;
 import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Recipe;
 import guru.springframework.domain.UnitOfMeasure;
 
-class IngredientToIngredientCommandTest {
+public class IngredientToIngredientCommandTest {
 
 	public static final Recipe RECIPE = new Recipe();
 	public static final BigDecimal AMOUNT = new BigDecimal("1");
@@ -22,13 +22,13 @@ class IngredientToIngredientCommandTest {
 	
 	IngredientToIngredientCommand converter;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		converter = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
 	}
 
 	@Test
-	void testNullConvert() {
+	public void testNullConvert() {
 		assertNull(converter.convert(null));
 	}
 	

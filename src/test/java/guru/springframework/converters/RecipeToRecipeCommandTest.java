@@ -1,9 +1,9 @@
 package guru.springframework.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import guru.springframework.command.RecipeCommand;
 import guru.springframework.domain.Category;
@@ -12,7 +12,7 @@ import guru.springframework.domain.Ingredient;
 import guru.springframework.domain.Notes;
 import guru.springframework.domain.Recipe;
 
-class RecipeToRecipeCommandTest {
+public class RecipeToRecipeCommandTest {
 
 	public static final Long RECIPE_ID = 1L;
 	public static final Integer COOK_TIME = Integer.valueOf("5");
@@ -31,15 +31,15 @@ class RecipeToRecipeCommandTest {
 	
 	RecipeToRecipeCommand converter;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		converter = new RecipeToRecipeCommand(new CategoryToCategoryCommand(),
 				new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
 				new NotesToNotesCommand());
 	}
 
 	@Test
-	void testNullObject () {
+	public void testNullObject () {
 		assertNull(converter.convert(null));
 	}
 	

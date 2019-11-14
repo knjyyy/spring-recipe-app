@@ -1,31 +1,31 @@
 package guru.springframework.converters;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import guru.springframework.command.CategoryCommand;
 import guru.springframework.domain.Category;
 
-class CategoryCommandToCategoryTest {
+public class CategoryCommandToCategoryTest {
 
 	public static final Long ID_VALUE = 1L;
 	public static final String DESCRIPTION = "description";
 	CategoryCommandToCategory converter;
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		converter = new CategoryCommandToCategory();
 	}
 
 	@Test
-	void testNullObject() {
+	public void testNullObject() {
 		assertNull(converter.convert(null));
 	}
 
 	@Test
-	void testEmptyObject() {
+	public void testEmptyObject() {
 		assertNotNull(converter.convert(new CategoryCommand()));
 	}
 	

@@ -8,7 +8,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import static org.mockito.Mockito.*;
@@ -20,9 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import guru.springframework.domain.Recipe;
-import guru.springframework.repository.RecipeRepository;
 import guru.springframework.service.RecipeService;
-import guru.springframework.service.RecipeServiceImpl;
 
 public class IndexControllerTest {
 

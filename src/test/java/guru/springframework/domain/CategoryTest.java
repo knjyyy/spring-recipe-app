@@ -55,4 +55,33 @@ public class CategoryTest {
 		assertEquals(recipes, this.category.getRecipes());
 	}
 
+	@Test
+	public void testEquals() {
+		Category cat1 = new Category();
+		cat1.setId(1L);
+		Category cat2 = new Category();
+		cat2.setId(1L);
+		
+		assertEquals(true, cat1.equals(cat2));
+	}
+	
+	@Test
+	public void testNotEquals() {
+		Category cat1 = new Category();
+		cat1.setId(1L);
+		Category cat2 = new Category();
+		cat2.setId(2L);
+		
+		assertEquals(false, cat1.equals(cat2));
+	}
+	
+	@Test
+	public void testNotNullEquals() {
+		Category cat1 = new Category();
+		cat1.setId(1L);
+		Category cat2 = new Category();
+		cat2.setId(2L);
+		
+		assertNotNull(cat1.equals(cat2));
+	}
 }

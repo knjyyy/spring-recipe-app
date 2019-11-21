@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.HashSet;
 import guru.springframework.command.IngredientCommand;
 import guru.springframework.command.RecipeCommand;
 import guru.springframework.service.IngredientService;
@@ -20,10 +21,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import java.util.HashSet;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
+
 
 public class IngredientControllerTest {
 
@@ -114,6 +114,17 @@ public class IngredientControllerTest {
 	}
 	
 	@Test
+	public void testDeleteIngredient() throws Exception {
+		//then
+		mockMvc.perform(get("/recipes/2/ingredients/3/delete")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("id","")
+				.param("description", "some string")
+		).andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/recipes/2/ingredients"));
+	}
+	
+	@Test
 	public void testSaveOrUpdate() throws Exception {
 		//given 
 		IngredientCommand command = new IngredientCommand();
@@ -125,9 +136,6 @@ public class IngredientControllerTest {
 
 		//then
 		mockMvc.perform(post("/recipes/2/ingredients")
-				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.param("id","")
-				.param("description", "some string")
 		).andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/recipes/2/ingredients/3/show"));
 

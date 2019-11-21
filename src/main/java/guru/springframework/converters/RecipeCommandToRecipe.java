@@ -5,7 +5,6 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import guru.springframework.command.RecipeCommand;
-import guru.springframework.domain.Category;
 import guru.springframework.domain.Recipe;
 import lombok.Synchronized;
 

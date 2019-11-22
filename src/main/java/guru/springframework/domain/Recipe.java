@@ -53,7 +53,7 @@ public class Recipe {
 	private Set<Ingredient> ingredients = new HashSet<>();
 
 	@Lob
-	private byte[] image;
+	private Byte[] image;
 
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;

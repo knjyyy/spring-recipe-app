@@ -44,7 +44,7 @@ public class CategoryTest {
 				.url("")
 				.direction("Sample direction for the sample recipe.")
 				.ingredients(new HashSet<>())
-				.image(new byte[2])
+				.image(new Byte[2])
 				.difficulty(Difficulty.EASY)
 				.categories(new HashSet<>())
 				.build();

@@ -17,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import guru.springframework.command.RecipeCommand;
 import guru.springframework.domain.Recipe;
+import guru.springframework.exceptions.NotFoundException;
 import guru.springframework.service.RecipeService;
 
 public class RecipeControllerTest {
@@ -48,6 +49,14 @@ public class RecipeControllerTest {
 			.andExpect(model().attributeExists("recipe"));
 	}
 
+	@Test
+	public void testGetRecipeNotFound() throws Exception {
+		when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+		
+		mockMvc.perform(get("/recipes/23/show"))
+			.andExpect(status().isNotFound());
+	}
+	
 	@Test
 	public void testGetNewRecipeForm() throws Exception {
 		mockMvc.perform(get("/recipes/new"))

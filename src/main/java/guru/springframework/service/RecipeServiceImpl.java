@@ -12,6 +12,7 @@ import guru.springframework.command.RecipeCommand;
 import guru.springframework.converters.RecipeCommandToRecipe;
 import guru.springframework.converters.RecipeToRecipeCommand;
 import guru.springframework.domain.Recipe;
+import guru.springframework.exceptions.NotFoundException;
 import guru.springframework.repository.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +34,7 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public Set<Recipe> getRecipes() {
 		log.debug("RecipeService.getRecipes()");
-		Set<Recipe> recipeSet = new HashSet<>();
+		Set<Recipe> recipeSet = new HashSet<>();	
 		recipeRepository.findAll().iterator().forEachRemaining(recipeSet::add);
 		return recipeSet;  
 	}
@@ -43,7 +44,8 @@ public class RecipeServiceImpl implements RecipeService{
 		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 		
 		if(!recipeOptional.isPresent()) {
-			throw new RuntimeException("Recipe not found.");
+			//throw new RunTimeException("Recipe not found.");
+			throw new NotFoundException("Recipe was not found.");
 		}
 		
 		return recipeOptional.get();
@@ -59,8 +61,8 @@ public class RecipeServiceImpl implements RecipeService{
 		return recipeToRecipeCommand.convert(savedRecipe);
 	}
 
-	@Transactional
 	@Override
+	@Transactional
 	public RecipeCommand findCommandById(Long id) {
 		Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 		return recipeToRecipeCommand.convert(recipeOptional.get());		

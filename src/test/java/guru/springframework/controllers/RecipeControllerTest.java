@@ -33,7 +33,9 @@ public class RecipeControllerTest {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		controller = new RecipeController(recipeService);
-		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+		mockMvc = MockMvcBuilders.standaloneSetup(controller)
+				.setControllerAdvice(new ControlExceptionHandler())
+				.build();
 	}
 
 	@Test
@@ -56,6 +58,14 @@ public class RecipeControllerTest {
 		mockMvc.perform(get("/recipes/23/show"))
 			.andExpect(status().isNotFound())
 			.andExpect(view().name("404error"));
+	}
+	
+	@Test
+	public void testGetRecipeNumberFormat() throws Exception {
+		
+		mockMvc.perform(get("/recipes/abcd/show"))
+			.andExpect(status().isBadRequest())
+			.andExpect(view().name("400error"));
 	}
 	
 	@Test

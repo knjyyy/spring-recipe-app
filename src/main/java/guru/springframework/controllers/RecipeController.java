@@ -1,8 +1,11 @@
 package guru.springframework.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,8 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class RecipeController {
 
-	private  RecipeService recipeService;
-	
+	private RecipeService recipeService;
+	private static final String URL_RECIPE_RECIPEFORM = "recipes/recipeform";
+
 	public RecipeController(RecipeService recipeService) {
 		this.recipeService = recipeService;
 	}
@@ -35,17 +39,26 @@ public class RecipeController {
 	@GetMapping("/recipes/new")
 	public String newRecipe(Model model) {
 		model.addAttribute("recipe", new RecipeCommand());
-		return "recipes/recipeform";
+		return URL_RECIPE_RECIPEFORM;
 	}
 	
 	@GetMapping("/recipes/{id}/update")
 	public String updateRecipe(@PathVariable String id, Model model) {
 		model.addAttribute("recipe", recipeService.findCommandById(Long.valueOf(id)));
-		return "recipes/recipeform";
+		return URL_RECIPE_RECIPEFORM;
 	}
 
 	@PostMapping("/recipes")
-	public String saveOrUpdate (@ModelAttribute RecipeCommand command) {
+	public String saveOrUpdate (@Valid @ModelAttribute("recipe") RecipeCommand command, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			bindingResult.getAllErrors().forEach(objectError -> {
+				log.debug(objectError.toString());
+			});
+			
+			return URL_RECIPE_RECIPEFORM;
+		}
+		
 		RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 		return "redirect:/recipes/" + savedCommand.getId() + "/show";
 	}

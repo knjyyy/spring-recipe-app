@@ -25,18 +25,81 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-@Profile("default")
-public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
+@Profile({"dev", "prod"})
+public class BootstrapMySQL implements ApplicationListener<ContextRefreshedEvent> {
 
 	private CategoryRepository categoryRepository;
 	private RecipeRepository recipeRepository;
 	private UnitOfMeasureRepository unitOfMeasureRepository;
 	
-	public RecipeBootstrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository,
+	public BootstrapMySQL(CategoryRepository categoryRepository,
 			UnitOfMeasureRepository unitOfMeasureRepository) {
 		this.categoryRepository = categoryRepository;
-		this.recipeRepository = recipeRepository;
 		this.unitOfMeasureRepository = unitOfMeasureRepository;
+	}
+
+	@Override
+	@Transactional
+	public void onApplicationEvent(ContextRefreshedEvent arg0) {
+		//recipeRepository.saveAll(getRecipes());
+		
+		if(categoryRepository.count() == 0L) {
+			loadCategories();
+			log.debug("Loading categories");
+		}
+
+		if(unitOfMeasureRepository.count() == 0L) {
+			loadUOM();
+			log.debug("Loading Unit of Measure");
+		}
+	}
+	
+	public void loadCategories() {
+		Category cat1 = new Category();
+		cat1.setDescription("American");
+		categoryRepository.save(cat1);
+
+		Category cat2 = new Category();
+		cat1.setDescription("Italian");
+		categoryRepository.save(cat2);
+		
+		Category cat3 = new Category();
+		cat1.setDescription("Mexican");
+		categoryRepository.save(cat3);
+		
+		Category cat4 = new Category();
+		cat1.setDescription("Fast Food");
+		categoryRepository.save(cat4);
+	}
+
+	public void loadUOM() {		
+		UnitOfMeasure uom1 = new UnitOfMeasure();
+		uom1.setDescription("Teaspoon");
+		unitOfMeasureRepository.save(uom1);
+
+		UnitOfMeasure uom2 = new UnitOfMeasure();
+		uom1.setDescription("Tablespoon");
+		unitOfMeasureRepository.save(uom2);
+
+		UnitOfMeasure uom3 = new UnitOfMeasure();
+		uom1.setDescription("Cup");
+		unitOfMeasureRepository.save(uom3);
+
+		UnitOfMeasure uom4 = new UnitOfMeasure();
+		uom1.setDescription("Pinch");
+		unitOfMeasureRepository.save(uom4);
+
+		UnitOfMeasure uom5 = new UnitOfMeasure();
+		uom1.setDescription("Ounce");
+		unitOfMeasureRepository.save(uom5);
+
+		UnitOfMeasure uom6 = new UnitOfMeasure();
+		uom1.setDescription("Piece");
+		unitOfMeasureRepository.save(uom6);
+
+		UnitOfMeasure uom7 = new UnitOfMeasure();
+		uom1.setDescription("Dash");
+		unitOfMeasureRepository.save(uom7);
 	}
 	
 	public List<Recipe> getRecipes(){
@@ -195,13 +258,5 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		log.debug("getRecipes() - end");
 		
 		return recipes;
-	}
-
-	@Override
-	@Transactional
-	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-		recipeRepository.saveAll(getRecipes());
-		log.debug("Loading bootstrap");
-		
 	}
 }
